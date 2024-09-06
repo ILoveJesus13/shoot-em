@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8cpewgr0g2tb"]
+
+[ext_resource type="Script" path="res://eyes.gd" id="1_dgodr"]
+[ext_resource type="Texture2D" uid="uid://cnl4exiw0pd2j" path="res://Assets/enemy ships/Eyeball.png" id="1_gpw44"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k41kb"]
+radius = 15.1327
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnqx3"]
+atlas = ExtResource("1_gpw44")
+region = Rect2(0, 0, 36, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5e7k"]
+atlas = ExtResource("1_gpw44")
+region = Rect2(36, 0, 36, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0xwcc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnqx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5e7k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Eyes" type="Area2D" groups=["Enemy"]]
+script = ExtResource("1_dgodr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k41kb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9.53674e-07, -4.76837e-07)
+sprite_frames = SubResource("SpriteFrames_0xwcc")
+autoplay = "default"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
